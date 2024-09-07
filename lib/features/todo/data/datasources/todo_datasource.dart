@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -62,8 +63,8 @@ class TodoDataSource {
   Future<void> updateTodo(TodoModel todo) async {
     try {
       final db = await database;
-      await db.update('Todo', todo.toMap(),
-          where: 'id = ?', whereArgs: [todo.id]);
+      await db
+          .update('Todo', todo.toMap(), where: 'id = ?', whereArgs: [todo.id]);
     } catch (e) {
       print('Error updating todo: $e');
     }
@@ -74,7 +75,9 @@ class TodoDataSource {
       final db = await database;
       await db.delete('Todo', where: 'id = ?', whereArgs: [id]);
     } catch (e) {
-      print('Error deleting todo: $e');
+      if (kDebugMode) {
+        print('Error deleting todo: $e');
+      }
     }
   }
 }

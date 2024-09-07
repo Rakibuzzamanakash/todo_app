@@ -25,37 +25,31 @@ class AuthRepositoryImpl implements AuthRepository {
     if (response.statusCode == 200) {
       final user = UserModel.fromJson(json.decode(response.body));
 
-      // Retrieve the database instance from the DatabaseHelper
       final Database db = await databaseHelper.database;
 
-      // Save only the token to the database, not the entire user object
       await db.insert(
         'auth',
-        {'token': user.token},  // Store only the token
+        {'token': user.token},
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
 
-      return user;  // Return the user object for the app to use
+      return user;
     } else {
       throw Exception('Failed to login');
     }
   }
 
-  // Fetch the token from the auth table
   Future<String?> getToken() async {
-    // Retrieve the database instance
     final Database db = await databaseHelper.database;
 
     final List<Map<String, dynamic>> result = await db.query('auth', limit: 1);
     if (result.isNotEmpty) {
       return result.first['token'] as String?;
     }
-    return null;  // Return null if no token found
+    return null;
   }
 
-  // Implement a logout method to remove the token
   Future<void> logout() async {
-    // Retrieve the database instance
     final Database db = await databaseHelper.database;
 
     await db.delete('auth');

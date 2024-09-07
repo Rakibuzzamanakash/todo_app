@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_app/features/auth/presentation/bindings/auth_bindings.dart';
-import 'package:todo_app/features/auth/presentation/pages/login_page.dart';
 import 'package:todo_app/features/auth/presentation/pages/splash_screen.dart';
-import 'package:todo_app/features/todo/presentation/pages/todo_page.dart';
 
 import 'core/services/notification_services.dart';
 import 'features/todo/data/datasources/todo_datasource.dart';
@@ -13,17 +11,13 @@ import 'features/todo/presentation/bindings/todo_bindings.dart';
 import 'features/todo/presentation/controllers/todo_controller.dart';
 
 void main() async {
-  // Ensure Flutter bindings are initialized
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize notifications
   await NotificationService.initializeNotifications();
 
-  // Inject dependencies immediately instead of lazily
   Get.put<TodoRepository>(TodoRepositoryImpl(TodoDataSource.db));  // Inject Repository
   Get.put<TodoController>(TodoController(Get.find()));  // Inject Controller
 
-  // Call other initialization functions
   await init();
 
   runApp(const MyApp());

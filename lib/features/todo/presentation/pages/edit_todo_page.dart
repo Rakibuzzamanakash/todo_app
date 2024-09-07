@@ -13,7 +13,7 @@ class EditTodoPage extends StatelessWidget {
   final TextEditingController titleController;
   final TextEditingController descriptionController;
 
-  EditTodoPage({required this.todo})
+  EditTodoPage({super.key, required this.todo})
       : titleController = TextEditingController(text: todo.title),
         descriptionController = TextEditingController(text: todo.description) {
     // Initialize selectedImage with the existing image path if available
@@ -28,8 +28,8 @@ class EditTodoPage extends StatelessWidget {
         leading: IconButton(onPressed: (){
           controller.selectedImage.value = null;
           Get.back();
-        }, icon: Icon(Icons.arrow_back_ios)),
-        title: Text('Edit Todo'),
+        }, icon: const Icon(Icons.arrow_back_ios)),
+        title: const Text('Edit Todo'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -37,20 +37,20 @@ class EditTodoPage extends StatelessWidget {
           children: [
             TextField(
               controller: titleController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Todo Title',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
               controller: descriptionController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Todo Description',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Obx(() => Stack(
               children: [
                 Container(
@@ -65,7 +65,7 @@ class EditTodoPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5)
                   ),
                   child: controller.selectedImage.value == null
-                      ? Center(
+                      ? const Center(
                     child: Text('No image selected'),
                   )
                       : Image.file(
@@ -77,12 +77,12 @@ class EditTodoPage extends StatelessWidget {
                   alignment: Alignment.topRight,
                   child: IconButton(
                     onPressed: () => controller.pickImage(),
-                    icon: Icon(Icons.camera, color: Colors.white),
+                    icon: const Icon(Icons.camera, color: Colors.white),
                   ),
                 )
               ],
             )),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Obx(() => Container(
               decoration: BoxDecoration(
                   border: Border.all(
@@ -96,11 +96,11 @@ class EditTodoPage extends StatelessWidget {
                       : DateFormat('yyyy-MM-dd – kk:mm')
                       .format(controller.selectedDateTime.value!),
                 ),
-                trailing: Icon(Icons.calendar_today),
+                trailing: const Icon(Icons.calendar_today),
                 onTap: () => controller.selectDateTime(context),
               ),
             )),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             CustomButton(title: 'Update Todo', onAction: (){
               final imagePath = controller.selectedImage.value?.path ?? todo.imageUrl;
               final dateTime = controller.selectedDateTime.value;

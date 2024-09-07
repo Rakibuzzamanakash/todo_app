@@ -7,7 +7,6 @@ class NotificationService {
   FlutterLocalNotificationsPlugin();
 
   static Future<void> initializeNotifications() async {
-    // Initialize Timezone data (required for scheduled notifications)
     tz.initializeTimeZones();
 
     const AndroidInitializationSettings initializationSettingsAndroid =
@@ -19,7 +18,6 @@ class NotificationService {
       requestBadgePermission: true,
       requestSoundPermission: true,
       onDidReceiveLocalNotification: (id, title, body, payload) async {
-        // Handle notification on iOS when app is in foreground
       },
     );
 
@@ -54,7 +52,6 @@ class NotificationService {
           channelDescription: 'Notification for incomplete tasks',
           importance: Importance.max,
           priority: Priority.high,
-          // Removed androidScheduleMode parameter
         ),
       ),
       uiLocalNotificationDateInterpretation:

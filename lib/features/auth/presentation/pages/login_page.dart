@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_app/core/utils/widgets/custom_button.dart';
-import 'package:todo_app/core/utils/widgets/custom_textField.dart';
+import 'package:todo_app/core/utils/widgets/coustom_textField.dart';
 
 import '../controller/auth_controller.dart';
 
@@ -16,8 +16,8 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Login'),
-          centerTitle: true,
+        title: const Text('Login'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -26,8 +26,7 @@ class LoginPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomTextField(
-                controller: usernameController,
-                labelText: 'Username'),
+                controller: usernameController, labelText: 'Username'),
             const SizedBox(height: 16),
             CustomTextField(
                 controller: passwordController,
@@ -37,16 +36,12 @@ class LoginPage extends StatelessWidget {
             Obx(() {
               return authController.isLoading.value
                   ? const CircularProgressIndicator()
-                  : CustomButton(title: 'Login', onAction: (){
-                authController.login(usernameController.text, passwordController.text);
-              });
-
-              // ElevatedButton(
-              //   onPressed: () {
-              //     authController.login(usernameController.text, passwordController.text);
-              //   },
-              //   child: const Text('Login'),
-              // );
+                  : CustomButton(
+                      title: 'Login',
+                      onAction: () {
+                        authController.login(
+                            usernameController.text, passwordController.text);
+                      });
             }),
           ],
         ),

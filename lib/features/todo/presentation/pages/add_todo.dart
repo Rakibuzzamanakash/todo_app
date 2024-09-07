@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/core/utils/widgets/custom_button.dart';
-import 'package:todo_app/core/utils/widgets/custom_textField.dart';
+import 'package:todo_app/core/utils/widgets/coustom_textField.dart';
 import '../controllers/todo_controller.dart';
 
 class AddTodoPage extends StatelessWidget {
@@ -42,19 +42,16 @@ class AddTodoPage extends StatelessWidget {
                         height: 150,
                         width: double.maxFinite,
                         decoration: BoxDecoration(
-                          color: Colors.blueGrey,
-                          border: Border.all(
-                            width: 3,
-                            color: Colors.grey
-                          ),
-                          borderRadius: BorderRadius.circular(5)
-                        ),
+                            color: Colors.blueGrey,
+                            border: Border.all(width: 3, color: Colors.grey),
+                            borderRadius: BorderRadius.circular(5)),
                         child: controller.selectedImage.value == null
                             ? const Center(
-                                child: Text('No image selected',style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white
-                                ),),
+                                child: Text(
+                                  'No image selected',
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white),
+                                ),
                               )
                             : Image.file(
                                 controller.selectedImage.value!,
@@ -89,7 +86,6 @@ class AddTodoPage extends StatelessWidget {
                     ),
                   )),
               const SizedBox(height: 20),
-
               CustomButton(
                 title: 'Add Todo',
                 onAction: () async {
